@@ -9,6 +9,8 @@ int main(){
     float result; 
 
     // Write your code here
+
+    result = (nums[0] + nums[1] + nums[2] + nums[3] + nums[4]) / 5.0f;
     
     std::cout << "The average is " << result << std::endl;
     
