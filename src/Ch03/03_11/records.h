@@ -1,4 +1,6 @@
-#pragma once
+/*#pragma once*/
+#ifndef RECORDS
+#define RECORDS
 
 #include <string>
 
@@ -38,3 +40,5 @@ public:
     int get_course_id() const;
     char get_grade() const;
 };
+
+#endif // RECORDS
