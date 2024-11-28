@@ -10,7 +10,6 @@ int main(){
     float GPA = 0.0f;
     float DEN = 0.0f;    
     int id;
-    int grd;
     int crd;
     
     std::vector<Student> students = {Student(1, "George P. Burdell"),
@@ -29,20 +28,18 @@ int main(){
 
     // Calculate the GPA for the selected student.
     
-    for (Grade xx : grades){
+    for (Grade& xx : grades){
         if (xx.get_student_id() == id){
+            int grd;
             switch(xx.get_grade()){
-				case 'A':
-					grd = 4;
+				case 'A': grd = 4;
 					break;
-				case 'B':
-					grd = 3;
+				case 'B': grd = 3;
 					break;   
-				case 'C':
-					grd = 2;
+				case 'C': grd = 2;
 					break; 
 			}
-        for (Course yy : courses){
+        for (Course& yy : courses){
             if (xx.get_course_id() == yy.get_id())
                 crd = yy.get_credits();
         }
