@@ -1,5 +1,6 @@
 #include "records.h"
 #include <iostream>
+#include <fstream>
 
 Student::Student(int the_id, std::string the_name){
     id = the_id;
@@ -107,13 +108,23 @@ std::string StudentRecords::get_course_name(int cid) const{
 
 void StudentRecords::report_card(int sid){
     float points = 0.0f, credits = 0.0f;
-    std::cout << std::endl << "Report Card for " << get_student_name(sid) << std::endl;
-    for (Grade& grd : grades)
-        if (grd.get_student_id() == sid){
-            std::cout << get_course_name(grd.get_course_id()) << ": " << grd.get_grade() << std::endl;
-            unsigned char current_credits = get_course_credits(grd.get_course_id());
-            credits += current_credits;
-            points += get_num_grade(grd.get_grade()) * current_credits;
-        }
-    std::cout << "GPA: " << (points / credits) << std::endl;
+    std::ofstream outFile;
+    outFile.open("report_card.txt");
+
+    if (outFile.fail())
+        std::cout << std::endl << "Couldn't open the file!" << std::endl;
+    else{
+        outFile << "Report Card for " << get_student_name(sid) << std::endl;
+		for (Grade& grd : grades)
+			if (grd.get_student_id() == sid){
+				outFile << get_course_name(grd.get_course_id()) << ": " << grd.get_grade() << std::endl;
+				unsigned char current_credits = get_course_credits(grd.get_course_id());
+				credits += current_credits;
+				points += get_num_grade(grd.get_grade()) * current_credits;
+			}
+		outFile << "GPA: " << (points / credits);
+        outFile.close();
+        std::cout << "Report card file written successfully!" << std::endl;
+    }
+
 }
